@@ -12,15 +12,27 @@ $search = '';
 $query = "";
 $connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
 if ($connection->connect_error) echo "Fatal Error".$connection->connect_error;
-//$search_window = true;
-//$criter = '';
-/*if (isset($_POST['criteria'])) {$criteria = $_POST['criteria'];
-    print_r($_POST);*/
-/*echo $criteria;}*/
-//$search_author = $search_title = $search_category = '';
-//if(isset($_POST['search_title'])) $search_title = $_POST['search_title'];
-//if(isset($_POST['search_category'])) $search_category = $_POST['search_category'];
+
 $authors = $title = $description = $year = $category  = $pictureURL = $price='';
+
+/*if (isset($_POST['criteria'])) 
+    {
+        $_SESSION['criteria'] = $_POST['criteria'];
+    }
+    
+if(isset($_POST['search'])) 
+    {
+        $_SESSION['search'] =  $_POST['search'];
+    }
+    if(isset($_SESSION['criteria'],$_SESSION['search'])&&$_SESSION['search']!=''){
+        $criteria = $_SESSION['criteria'];
+        $search = $_SESSION['search'];
+        echo "CRITERIA".$criteria."SEARCH".$search."VAR_DUMP".var_dump($search);//$reg ='/^'.preg_quote($search).'$/';
+        $query = "SELECT * FROM books WHERE $criteria REGEXP '$search'";
+    } else
+    {
+        $query = "SELECT * FROM books";
+    }*/
 //require_once "add.php";
 //require_once "add.php"
 //require_once "login.php";
@@ -97,27 +109,13 @@ $conn->close()*/
     $result = $connection->query($query);
     print_r($result);
 } else {*/
-    function filtering($result,$criteria,$search){
-        return ;
+    function filtering($irem,$criteria,$search){
+        return $item["$criteria"]=$search;
     }
-//$query = "SELECT * FROM books";}
-//$result = $connection->query($query);
-//if(!$result) die ('Alar');
-//var_dump($result);
-/*if(isset($_SESSION['criteria'])&&($_SESSION['search'])){
-    $criteria = $_SESSION['criteria'];
-    $search = $_SESSION['search'];
-    $query = "SELECT * FROM books WHERE $criteria REGEXP '^$search$'";//^{$search}$'";
-    $result = $connection->query($query);
-    var_dump($result);
-}
-else */
- $query = "SELECT * FROM books";
+
+$query = "SELECT * FROM books";
  $result = $connection->query($query);
 if(!$result) die ('Alar');
-//{if(isset($_SESSION['search']))}
-    
-   
 ?>
 <div id = "sh">
 <?php
@@ -127,14 +125,11 @@ for ($j=0;$j<$rows;$j++){
     $bookId = htmlspecialchars($row['bookId']);
     $authors = htmlspecialchars($row['authors']);
     $title = htmlspecialchars($row['title']);
-    //$description = htmlspecialchars($row['description']);
     $year = htmlspecialchars($row['year']);
     $category = htmlspecialchars($row['category']);
     $pictureURL = htmlspecialchars($row['pictureURL']);
     $price = htmlspecialchars($row['price']);
-    //$rating = 10;
-    //$stars = array_fill(0,$rating,true);
-
+    
     echo <<<_END
     <pre>
             Author(s) $authors
@@ -149,9 +144,10 @@ for ($j=0;$j<$rows;$j++){
     
 _END;
 }
-
+echo var_dump($rows);
+if ($rows==0){echo "0 books found";}
+else {echo "$rows books found";};
 ?>
-
 </div>
 <?php
 echo <<<_END
@@ -166,20 +162,18 @@ function chooseCriteria(criteria){
     $.post('news.php',
     {criteria:criteria.value},
     function(data){
-    $('#criteria').html(data)
     console.log(criteria.value)
     })
 }
 function searchBook(book){
     let search = $('#search').val()
-    if (search!=''){
     $.post('news.php',  
     {search: search},
     function(data){
     $('#sh').html(data)
     console.log(search)
     })
-}
+
 }
 </script>
 _ENDI;
@@ -187,13 +181,10 @@ echo <<<_SEARCH_BOX
 <input type = "radio" value = "authors" name = "criteria" onchange = "chooseCriteria(this)">Authors<br>
 <input type = "radio" value ="title" name = "criteria" onchange = "chooseCriteria(this)">Titl <br>
 <input type = "radio" value = "category" name = "criteria" onchange = "chooseCriteria(this)">Category<br>
-<input type  = text" id ="search" name  = "search" onchange = "searchBook(this)">
+<input type  = text" id ="search" name  = "search" oninput = "searchBook(this)">
 <span id = "criteria">ww</span>
 <span id = "searching">hh</span>
-
-
 _SEARCH_BOX;
-
 ?>
 
 
