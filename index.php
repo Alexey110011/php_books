@@ -129,6 +129,7 @@ for ($j=0;$j<$rows;$j++){
     $category = htmlspecialchars($row['category']);
     $pictureURL = htmlspecialchars($row['pictureURL']);
     $price = htmlspecialchars($row['price']);
+    $rating = htmlspecialchars($row['rating']);
     
     echo <<<_END
     <pre>
@@ -139,10 +140,21 @@ for ($j=0;$j<$rows;$j++){
             PictureURL $pictureURL
             Price $price
             Rating 
-            <div class="stars" id = "stars1">Pp<div>
+            
+            <div class="stars1" id = "$bookId">Pp<div>
     </pre>
-    
-_END;
+    _END;
+    for ($i=0;$i<5;$i++){
+        if ($i<$rating){
+            echo <<<_STAR
+           <span style = "color:red">R rat</span>
+           _STAR;
+           } else {
+            echo <<<_STAR
+            <span style = color:black">R rat</span>
+            _STAR;
+           }
+    }
 }
 echo var_dump($rows);
 if ($rows==0){echo "0 books found";}
@@ -167,7 +179,7 @@ function chooseCriteria(criteria){
 }
 function searchBook(book){
     let search = $('#search').val()
-    $.post('news.php',  
+    $.post('search.php',  
     {search: search},
     function(data){
     $('#sh').html(data)
@@ -179,7 +191,7 @@ function searchBook(book){
 _ENDI;
 echo <<<_SEARCH_BOX
 <input type = "radio" value = "authors" name = "criteria" onchange = "chooseCriteria(this)">Authors<br>
-<input type = "radio" value ="title" name = "criteria" onchange = "chooseCriteria(this)">Titl <br>
+<input type = "radio" value ="title" name = "criteria" onchange = "chooseCriteria(this)">Title <br>
 <input type = "radio" value = "category" name = "criteria" onchange = "chooseCriteria(this)">Category<br>
 <input type  = text" id ="search" name  = "search" oninput = "searchBook(this)">
 <span id = "criteria">ww</span>

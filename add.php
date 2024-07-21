@@ -2,14 +2,15 @@
 require_once 'header.php';
 require_once "login.php";
 
+$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
+echo "Current_page is".$_SESSION['current_page'];
  if (isset($_SESSION['user']))
  echo "SESSIONuser".$_SESSION['user'];
 else {
-    //if(!isset($__SESSION['user']))
- /*{*/header('Location:llogin.php');
+    header('Location:llogin.php');
     exit;
- /*}*/
 }
+
 $connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
 if ($connection->connect_error) echo "Fatal Error".$connection->connect_error;
 
@@ -45,7 +46,7 @@ $query = "INSERT INTO books (authors,title,description,year,category,pictureURL,
 ('$authors','$title','$description','$year','$category','$pictureURL','$price')";
 $result = $connection->query($query);
 if(!$result) echo "Somthing wrong";
-$connection->close();//echo $category;
+$connection->close();
 }
 
 function get_post($connection, $var){
@@ -76,5 +77,3 @@ echo <<<_END
     </body>
 </html>
 _END;
-//$result->close();
-//$connection->close();

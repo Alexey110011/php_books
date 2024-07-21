@@ -59,7 +59,6 @@ echo "Rows".var_dump($rows);
  <?php 
  for ($i =0;$i<5; $i++){
  if ($i<$user_rating){
-     //echo "USERname".$username;
      echo <<<_STAR
     <span style = "color:red">R rat</span>
     _STAR;

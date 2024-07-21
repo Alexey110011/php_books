@@ -21,6 +21,7 @@ for ($j=0;$j<$rows;$j++){
     $category = htmlspecialchars($row['category']);
     $pictureURL = htmlspecialchars($row['pictureURL']);
     $price = htmlspecialchars($row['price']);
+    $rating =  htmlspecialchars($row['rating']);
 
     echo <<<_END
     <div>
@@ -31,28 +32,28 @@ for ($j=0;$j<$rows;$j++){
             Category $category
             PictureURL $pictureURL
             Price $price
-            Rating <div class="stars" id = "stars">Pp<div>
-    </div>
+     </div>
    
 _END;
+for ($i=0;$i<5;$i++){
+    if ($i<$rating){
+        echo <<<_STAR
+       <span style = "color:red" id = "rating_$bookId">R</span>
+       _STAR;
+       } else {
+        echo <<<_STAR
+        <span style = color:black" id = "rating_$bookId">R</span>
+        _STAR;
+       }
 }
-?>
-<div id = "review">
-    <div class = "stars">
-        <?php 
-        for ($i=0;$i<5;$i++){
-            echo <<< _STARS
-            <span>R</span>
-            _STARS;
-        }
-        ?>
-    </div>
-    <textarea id = "review_text"></textarea>
-    <button id = "show" onclick = "showSelected()">Add a review </button>
-</div>
+}
 
+
+?>
+<button onclick  = "sendReview()">ADD review</button>
+<div id = "review"></div>
 <script type = "text/javascript" >
-let bookId = "<?php echo $bookId?>"
+let bookId = "<?php echo $bookId?>"/*
 let selected = 0;
 //Creating rating stars with JavaScript function onclick
 let stars = document.querySelector('.stars')
@@ -90,7 +91,7 @@ for (let i=0;i<5;i++){
     stars.appendChild(star)
 }*/
 
-    function showSelected(){
+    /*function showSelected(){
         console.log("Selected",selected)
         console.log(bookId)
         $.post('stars.php',
@@ -102,5 +103,14 @@ for (let i=0;i<5;i++){
             $('#stars').html(data)
             $('#stars1').html(data)
         })
-    }    
+    }   */
+        function sendReview(){
+        $.post('review.php',
+        {review:true,
+        bookId:bookId
+        },
+        function(data){
+            $('#review').html(data)
+        })
+    }
 </script>

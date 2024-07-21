@@ -10,7 +10,6 @@ if (isset($_POST['user']))
     else
     {
         $result = queryMysql("SELECT username, hash FROM users WHERE username = '$user'");
-        //$query_password = queryMysql("SELECT user FROM ")
         if ($result->num_rows == 0)
         {
             $error = 'User not found';
@@ -19,13 +18,14 @@ if (isset($_POST['user']))
         {
             var_dump($result);
             $hash = $result->fetch_object()->hash;
-            //$hash = $hash1->hash;
             if(password_verify($password, $hash))
-                {echo "Good!";
-                $_SESSION['user']=$user;
-                $_SESSION['password'] = $password;
-                header("Location:add.php");
-            echo "SESSSION user".$_SESSION['user'];}
+                {
+                    echo "Good!";
+                    $_SESSION['user']=$user;
+                    $_SESSION['password'] = $password;
+                    echo "SESSION user".$_SESSION['user'];
+                    header("Location". $_SESSION['current_page']);
+             }
          else{ echo "Invalid login attempt";}
         }
     }
