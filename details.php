@@ -33,8 +33,10 @@ for ($j=0;$j<$rows;$j++){
             PictureURL $pictureURL
             Price $price
      </div>
-   
-_END;
+   _END;
+?>
+<div class = "stars">
+<?php
 for ($i=0;$i<5;$i++){
     if ($i<$rating){
         echo <<<_STAR
@@ -45,18 +47,45 @@ for ($i=0;$i<5;$i++){
         <span style = color:black" id = "rating_$bookId">R</span>
         _STAR;
        }
+    }
 }
-}
-
-
 ?>
+</div>
 <button onclick  = "sendReview()">ADD review</button>
 <div id = "review"></div>
+<div id = 'reviews'>
+<?php
+$connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
+if ($connection->connect_error)
+ echo "Fatal Error".$connection->connect_error;
+$query = "SELECT * FROM reviews WHERE bookId = '$bookId'";
+$result = $connection->query($query);
+if(!$result) die ('AlarSELECT');
+$rows= $result->num_rows;
+for ($j=0;$j<$rows;$j++){
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+    $username = htmlspecialchars($row['username']);
+    $review = htmlspecialchars($row['review']);
+    $user_rating = htmlspecialchars($row['user_rating']);
+    echo <<<_REVIEWS
+    <pre>
+    Username $username
+    Review $review
+    Rating $user_rating
+    </pre>
+    _REVIEWS;
+}
+ ?>
+ <div>
 <script type = "text/javascript" >
-let bookId = "<?php echo $bookId?>"/*
-let selected = 0;
+let queryString = window.location.search;
+let urlParams = new URLSearchParams(queryString);
+let bookId = urlParams.get('bookId').replaceAll("\'", "");
+console.log("BookId", bookId)
+//let bookId = "<?/*php echo $bookId*/?>"/*
+//let selected = 0;
 //Creating rating stars with JavaScript function onclick
-let stars = document.querySelector('.stars')
+/*let stars = document.querySelector('.stars')
 for (let i=0;i<5;i++){
     let star = document.querySelector(".stars").getElementsByTagName('span')[i]
     star.onclick = function(){
@@ -71,7 +100,7 @@ for (let i=0;i<5;i++){
             }
         }
     }
-}
+}*/
 //Alternative variant  - creating stars only with Javascript
 /*for (let i=0;i<5;i++){
     let star = document.createElement('span')

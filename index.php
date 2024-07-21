@@ -139,9 +139,8 @@ for ($j=0;$j<$rows;$j++){
             Category $category
             PictureURL $pictureURL
             Price $price
-            Rating 
-            
-            <div class="stars1" id = "$bookId">Pp<div>
+            Rating             
+            <div class="stars1" id  = "$bookId"><div>
     </pre>
     _END;
     for ($i=0;$i<5;$i++){

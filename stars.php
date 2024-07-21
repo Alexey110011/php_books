@@ -21,12 +21,26 @@ $query_set_reviews = "INSERT INTO reviews (bookId, username, review, user_rating
 $result_set_reviews = $connection->query($query_set_reviews);
 if(!$result_set_reviews) die ('AlarINSERT');
 
-$query_get_reviews = "SELECT user_rating FROM reviews WHERE bookId = '$bookId'";
+$query_get_reviews = "SELECT * FROM reviews WHERE bookId = '$bookId'";
 $result_get_reviews = $connection->query($query_get_reviews);
 if(!$result_get_reviews) die ('AlarSELECT');
 $rows= $result_get_reviews->num_rows;
 echo "Rows".var_dump($rows);
-//if($rows==0){
+///$rows= $result->num_rows;
+/*for ($j=0;$j<$rows;$j++){
+    $row = $result->fetch_array(MYSQLI_ASSOC);
+    //$bookId = htmlspecialchars($row['bookId']);
+    $username = htmlspecialchars($row['username']);
+    $review = htmlspecialchars($row['review']);
+    $user_rating = htmlspecialchars($row['review']);
+    echo <<<_REVIEWS
+    <pre>
+    Username $username
+    Review $review
+    Rating $username
+    </pre>
+    _REVIEWS;
+}*/
     /*$query = "UPDATE books SET rating ='$user_rating' WHERE bookId = $bookId";
     $result = $connection->query($query);*/
     /*if(!$result) *//*echo "Somthing wrong 0";*/

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$i=true;
+//$i=true;
 echo <<<_INIT
 <!DOCTYPE html>
     <head>
