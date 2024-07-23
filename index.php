@@ -1,10 +1,9 @@
 <?php
-//session_start();
 require_once "header.php";
 require_once "setup.php";
 require_once "login.php";
-require_once "styles.css";
 require_once "login.php";
+require_once 'menu.php';
 if (isset($_SESSION['user']))
 echo "SESSIONuser".$_SESSION['user'];
 
@@ -15,103 +14,36 @@ if ($connection->connect_error) echo "Fatal Error".$connection->connect_error;
 
 $authors = $title = $description = $year = $category  = $pictureURL = $price='';
 
-/*if (isset($_POST['criteria'])) 
-    {
-        $_SESSION['criteria'] = $_POST['criteria'];
-    }
-    
-if(isset($_POST['search'])) 
-    {
-        $_SESSION['search'] =  $_POST['search'];
-    }
-    if(isset($_SESSION['criteria'],$_SESSION['search'])&&$_SESSION['search']!=''){
-        $criteria = $_SESSION['criteria'];
-        $search = $_SESSION['search'];
-        echo "CRITERIA".$criteria."SEARCH".$search."VAR_DUMP".var_dump($search);//$reg ='/^'.preg_quote($search).'$/';
-        $query = "SELECT * FROM books WHERE $criteria REGEXP '$search'";
-    } else
-    {
-        $query = "SELECT * FROM books";
-    }*/
-//require_once "add.php";
-//require_once "add.php"
-//require_once "login.php";
-/*echo "<h1>Hello, PHP</h1>";
-$author = "Fred Smith";
-echo "hello, $author";
-$team = array ('bob', 'joe', 'garvey');
-$team2 = array (7,9,20);
-foreach ($team as $item){
-    echo "$item<br>";
+function filtering($irem,$criteria,$search){
+    return $item["$criteria"]=$search;
 }
-foreach ($team2 as $item){
-    echo "$item<br>";
-}
-/*for ($count = 1;$count<3;++$count){
-    echo $count;
-}*/
-/*$new_array = array('first'=>"FIRST",
-'second'=>"SECOND");
-foreach($new_array as $list=>$desc){
-    echo "$list:$desc<br>";
-}
-$rand = array("ert", "qwe", "tyu", "iop");
-$random = shuffle($rand);//changing firdt array
-//$sorted = sort($rand); 
-foreach ($rand as $neww){
-    echo "$neww<br>";
-}
-echo count($rand);
-$skaz = "Too long sentence";
-$tempp = explode(' ',$skaz);
-foreach($tempp as $word){
-    echo "$word <br>";
-}
-//print($rand);
-printf ("MY age is %b",45);
-class User{
-    /*static*/ /*public $name="Guess"/*", $password*/;
-    /*function get_user(){
-        return $this->name; 
-    }
-}
-$object = new User();
-//$object->name = "Jeremy";
-echo $object->get_user();
-//echo User::$name/*get_user()*/
-/*class Test {
-    /*static*/ /*public $static_property = "This is static property";
-    function get_sp(){
-        //return self::$static_property
-        return $this->static_property;
-    }
-}
-$temp = new Test();
-//echo Test::$static_property;
-echo $temp->get_sp();
-echo $temp->static_property
-*/
-/*$conn= new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-if ($conn->connect_error){
-    die("Connection failed".$conn->connect_error);
-}
-$sql = "CREATE TABLE My (id int(6) unsigned primary key,
-first VARCHAR(30))";
-if ($conn->query($sql) === TRUE){
-    echo "TAble success";
-}else {echo "Nada".$conn->error;
-    }
-$conn->close()*/
-/*if(isset($_SESSION['criteria'])&&($_SESSION['search'])){
-    $criteria = $_SESSION['criteria'];
-    $search = $_SESSION['search'];
-    $query = "SELECT * FROM books WHERE $criteria = `^${$search}$`";
+
+if (isset($_POST['authors'])
+    &&isset($_POST['title'])    
+    &&isset($_POST['description'])
+    &&isset($_POST['year'])
+    &&isset($_POST['category'])
+    &&isset($_POST['pictureURL'])
+    &&isset($_POST['price']))
+{
+    $authors = get_post($connection, 'authors');
+    $title = get_post($connection, 'title');
+    $description = get_post($connection, 'description');
+    $year = get_post($connection, 'year');
+    $category = get_post($connection, 'category');
+    $pictureURL = get_post($connection, 'pictureURL');
+    $price = get_post($connection, 'price');
+    $query = "INSERT INTO books (authors,title,description,year,category,pictureURL,price) VALUES
+    ('$authors','$title','$description','$year','$category','$pictureURL','$price')";
     $result = $connection->query($query);
-    print_r($result);
-} else {*/
-    function filtering($irem,$criteria,$search){
-        return $item["$criteria"]=$search;
-    }
+    if(!$result) echo "Somthing wrong";
+    //$connection->close();
+}
+
+function get_post($connection, $var){
+     echo $connection->real_escape_string($_POST[$var]);
+    return $connection->real_escape_string($_POST[$var]);
+}
 
 $query = "SELECT * FROM books";
  $result = $connection->query($query);
@@ -120,6 +52,11 @@ if(!$result) die ('Alar');
 <div id = "sh">
 <?php
 $rows= $result->num_rows;
+if ($rows==0){echo "0 books found";}
+else {
+    echo "$rows books found";
+};
+
 for ($j=0;$j<$rows;$j++){
     $row = $result->fetch_array(MYSQLI_ASSOC);
     $bookId = htmlspecialchars($row['bookId']);
@@ -144,6 +81,7 @@ for ($j=0;$j<$rows;$j++){
     </pre>
     _END;
     for ($i=0;$i<5;$i++){
+       
         if ($i<$rating){
             echo <<<_STAR
            <span style = "color:red">R rat</span>
@@ -152,12 +90,9 @@ for ($j=0;$j<$rows;$j++){
             echo <<<_STAR
             <span style = color:black">R rat</span>
             _STAR;
-           }
+            }
     }
 }
-echo var_dump($rows);
-if ($rows==0){echo "0 books found";}
-else {echo "$rows books found";};
 ?>
 </div>
 <?php

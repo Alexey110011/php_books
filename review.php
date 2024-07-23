@@ -1,13 +1,15 @@
 <?php
 require_once 'header.php';
+
 $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 echo "Current_page is".$_SESSION['current_page'];
 if(!isset($_SESSION['user']))
-header("LOcation: llogin.php");
+header("Location: llogin.php");
 $bookId = $_POST['bookId'];
 if(isset($_POST['review']))
 ?>
 <div>
+<!--Create stars for rating-->
     <div class = "stars1" id ="stars">
         <?php 
         for ($i=0;$i<5;$i++){
@@ -24,9 +26,9 @@ if(isset($_POST['review']))
 
 
 <script type = "text/javascript" >
-let selected = 0;
-//Creating rating stars with JavaScript function onclick
-let stars = document.querySelector('.stars1')
+/*let*/selected = 0;
+//Creating JavaScript function onclick for rating
+/*let*/ stars = document.querySelector('.stars1')
 for (let i=0;i<5;i++){
     let star = document.querySelector(".stars1").getElementsByTagName('span')[i]
     star.onclick = function(){
@@ -40,20 +42,21 @@ for (let i=0;i<5;i++){
                 document.querySelector('.stars1').getElementsByTagName('span')[j].style.color="black"
             }
         }
-    }
+    } 
 }
+
 function showSelected(){
         console.log("Selected",selected)
-        console.log(bookId)
-        $.post('stars.php',
-        {user_rating: selected,
-        bookId:bookId,
+        let bookId = <?php echo $bookId?>;
+        $.post('stars.php', {
+        user_rating: selected,
+        bookId: bookId,
         review: $('#review_text').val()
-    },
+        },
         function(data){
-            $(`#${bookId}`).html(data)
-            $(`#rating_${bookId}`).html(data)
-            $('#review').css('visibilty','hidden')
-        })
-    }    
+            $('#reviews').html(data)
+            $('#review_form').html('')
+        }) 
+        selected = null
+}    
 </script>

@@ -1,6 +1,6 @@
 <?php
 require_once 'header.php';
-require_once 'functions.php';
+require_once 'menu.php';
 echo<<<_END
 
 <script>
@@ -19,7 +19,7 @@ function checkUser(username){
 </script>
 _END;
 $_SESSION= [];
-$error = $user/*name*/ = $password = "";
+$error = $user = $password = "";
 if(isset($_SESSION['user'])) destroySession();
 var_dump($_SESSION);
 if (isset($_POST['username']))

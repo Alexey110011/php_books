@@ -1,15 +1,8 @@
 <?php
 require_once 'header.php';
-if (isset($_POST['criteria'])) 
-    {
-        $_SESSION['criteria'] = $_POST['criteria'];
-    }
-    
-if(isset($_POST['search'])) 
-    {
-        $_SESSION['search'] =  $_POST['search'];
-    }
-    
+if (isset($_POST['criteria'])) $_SESSION['criteria'] = $_POST['criteria'];
+if (isset($_POST['search'])) $_SESSION['search'] =  $_POST['search'];
+        
     if(isset($_SESSION['search'])&&$_SESSION['search']!=''){
         $criteria = $_SESSION['criteria'];
         $search = $_SESSION['search'];
@@ -20,7 +13,7 @@ if(isset($_POST['search']))
         $query = "SELECT * FROM books";
     }
         $result = $connection->query($query);
-        var_dump($result);
+       // var_dump($result);
         if(!$result) die ('Alar');
                 
         $rows= $result->num_rows;
@@ -46,7 +39,6 @@ if(isset($_POST['search']))
                     PictureURL $pictureURL
                     Price $price
             </pre>
-          
         _END;
     }
     echo "<div>$rows books found</div>";

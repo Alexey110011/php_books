@@ -1,6 +1,10 @@
 <?php
-require_once('header.php');
+require_once 'header.php';
+require_once 'menu.php';
+
 $error = $user = $password = '';
+if (isset($_SESSION['current_user'])) echo $_SESSION['current_user'];
+else{echo "NO";}
 if (isset($_POST['user']))
 {
     $user = /*sanitizeString(*/$_POST['user']/*)*/;

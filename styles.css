@@ -1,3 +1,20 @@
+body{
+    //background-color: lightgreen;
+}
 form>*{
     display: block;
+}
+.menu ul li{
+    display:inline-block;
+    text-align:middle ;
+    height:50px;
+    font-weight:bold ;
+}
+
+ul{
+    display:flex;
+    justify-content: space-around;
+    color:white;
+    background-color: rgb(69, 214, 69);
+    text-decoration: none;
 }
