@@ -16,7 +16,8 @@ createTable('books',
  year CHAR(4),
  category VARCHAR(9),
  pictureURL VARCHAR(60),
- price  VARCHAR(10)');
+ price  VARCHAR(10), 
+ rating CHAR(1)');
 
 createTable('reviews',
 'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -25,6 +26,4 @@ createTable('reviews',
  review VARCHAR(500),
  user_rating CHAR (1)'
 );
-
-echo "Good!"
 ?>

@@ -12,8 +12,8 @@ if (isset($_POST['search'])) $_SESSION['search'] =  $_POST['search'];
     {
         $query = "SELECT * FROM books";
     }
+    
         $result = $connection->query($query);
-       // var_dump($result);
         if(!$result) die ('Alar');
                 
         $rows= $result->num_rows;

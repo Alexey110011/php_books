@@ -1,33 +1,35 @@
 <?php
 require_once 'header.php';
+$bookId = '';
+//set bookid for returning on page after login
+if(isset($_SESSION['bookId'])) $bookId = $_SESSION['bookId'];
+//echo "SESSION BookId:".$bookId;
 
-$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
-echo "Current_page is".$_SESSION['current_page'];
-if(!isset($_SESSION['user']))
-header("Location: llogin.php");
-$bookId = $_POST['bookId'];
-if(isset($_POST['review']))
+if(isset($_SESSION['user'])){
+//Displaying form for user's review
+    echo <<<_REVIEW1
+    <div style= "visibility:visible">
+        <!--Create stars for rating-->
+        <div class = "stars1" id ="stars">
+    _REVIEW1;
+    for ($i=0;$i<5;$i++){
+    echo <<< _STARS
+    <span class = "bi bi-star" style = "color:yellow"></span>
+    _STARS;
+    }
+    echo <<<_BOTTOM
+        </div>
+        <textarea style = "width:80%; margin:10px 10%" id = "review_text" rows = '10' ></textarea>
+        <button class = "btn btn-primary submit_btn" id = "show" onclick = "showSelected()">Add a review</button>
+        <div onclick = "closeReview()" class = "bi bi-x-square-fill" style =" color:red; position:absolute; top:0; right:0;height:35px; width:35px"></div>
+    </div> 
+    _BOTTOM;
+    }
 ?>
-<div>
-<!--Create stars for rating-->
-    <div class = "stars1" id ="stars">
-        <?php 
-        for ($i=0;$i<5;$i++){
-            echo <<< _STARS
-            <span>R</span>
-            _STARS;
-        }
-        ?>
-    </div>
-    <textarea id = "review_text"></textarea>
-    <button id = "show" onclick = "showSelected()">Add a review</button>
-</div>
-
-
-
+ 
 <script type = "text/javascript" >
-/*let*/selected = 0;
 //Creating JavaScript function onclick for rating
+/*let*/selected = 0;
 /*let*/ stars = document.querySelector('.stars1')
 for (let i=0;i<5;i++){
     let star = document.querySelector(".stars1").getElementsByTagName('span')[i]
@@ -37,17 +39,19 @@ for (let i=0;i<5;i++){
         console.log(selected)
         for (let j=0;j<document.querySelector('.stars1').getElementsByTagName('span').length;j++){
             if (j<selected){
-                document.querySelector('.stars1').getElementsByTagName('span')[j].style.color="red"
+                document.querySelector('.stars1').getElementsByTagName('span')[j].setAttribute('class',"bi bi-star-fill")
             } else {
-                document.querySelector('.stars1').getElementsByTagName('span')[j].style.color="black"
+                document.querySelector('.stars1').getElementsByTagName('span')[j].setAttribute('class',"bi bi-star")
+                document.querySelector('.stars1').getElementsByTagName('span')[j].setAttribute('style',"color:yellow")
             }
         }
     } 
 }
-
+//Sending user's review data to server
 function showSelected(){
         console.log("Selected",selected)
-        let bookId = <?php echo $bookId?>;
+        let bookIdFromPHP = <?php echo $_SESSION['bookId'];?>;
+        let bookId = bookIdFromPHP.replaceAll("\'", "")//normalzing query string
         $.post('stars.php', {
         user_rating: selected,
         bookId: bookId,
@@ -58,5 +62,9 @@ function showSelected(){
             $('#review_form').html('')
         }) 
         selected = null
-}    
+} 
+//Removing review form 
+function closeReview(){
+    $("#review_form").html('')
+}
 </script>

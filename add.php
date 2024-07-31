@@ -1,30 +1,20 @@
 <?php
 require_once 'header.php';
-require_once "login.php";
 require_once 'menu.php';
 
 $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 echo "Current_page is".$_SESSION['current_page'];
  if (!isset($_SESSION['user']))
- /*echo "SESSIONuser".$_SESSION['user'];
-else {*/
-    {header('Location:llogin.php');
-    exit;
-}
+    {
+        header('Location:llogin.php');
+        exit;
+    }
 
 $connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
 if ($connection->connect_error) echo "Fatal Error".$connection->connect_error;
 
 $authors = $title = $description = $year = $category  = $pictureURL = $price='';
 
-/*if (isset($_POST['authors'])) $authors = sanitizeString($_POST['authors']);
-if (isset($_POST['title'])) $title = sanitizeString($_POST['title']);
-if (isset($_POST['description'])) $description = sanitizeString($_POST['description']);
-if (isset($_POST['year'])) $year = sanitizeString($_POST['year']);
-if (isset($_POST['category'])) $category = sanitizeString($_POST['category']);
-if (isset($_POST['pictureURL'])) $pictureURL = sanitizeString($_POST['pictureURL']);
-if (isset($_POST['price'])) $price = sanitizeString($_POST['price']);
-if (isset($_POST['rating'])) $rating = sanitizeString($_POST['rating']);*/
 if (isset($_POST['authors'])
     &&isset($_POST['title'])    
     &&isset($_POST['description'])
@@ -45,6 +35,7 @@ $query = "INSERT INTO books (authors,title,description,year,category,pictureURL,
 $result = $connection->query($query);
 if(!$result) echo "Somthing wrong";
 $connection->close();
+header("Location:index.php");
 }
 
 function get_post($connection, $var){
@@ -58,20 +49,44 @@ echo <<<_END
         <title> adding form</title>
     </head>
     <body>
-        <form method = "post" action = "index.php">
-            Author(s) <input type = "text" name = "authors" maxlength = "100">
-            Title <input type = "text" name = "title" maxlength = "75">
-            Description <input type = "text" name = "description" maxlength = "500">
-            Year <input type = "text" name = "year" maxlength = "4">
-            Category<select name = "category" maxlength = "10">
-                        <option value = "Frontend">Frontend</option>
-                        <option value = "Backend">Backend</option>
-                        <option value = "Fullstack">Fullstack</option>
-                    </select>
-            PictureURL<input type = "text" name = "pictureURL" maxlength = "150">
-            Price <input type = "text" name = "price" maxlength = "7">
-            <input type = "submit" value= "Submit" Submit">
+    <div class = "form_wrapper">
+        <form method = "post" action = "add.php">
+            <div class = "form_group">
+                <label>Author(s)</label>
+                <input type = "text" name = "authors" maxlength = "100">
+            </div>
+            <div class = "form_group">
+                <label>Title </label>
+                <input type = "text" name = "title" maxlength = "75">
+            </div>
+            <div class = "form_group">
+                <label>Description</label>
+                <input type = "text" name = "description" maxlength = "500">
+            </div>
+            <div class = "form_group">
+                <label>Year</label>
+                <input type = "text" name = "year" maxlength = "4">
+            </div>
+            <div class = "form_group">
+                <label>Category</label>
+                <select style = "width:153px" name = "category" maxlength = "10">
+                    <option value = "Frontend">Frontend</option>
+                    <option value = "Backend">Backend</option>
+                    <option value = "Fullstack">Fullstack</option>
+                </select>
+            </div>
+            <div class = "form_group">
+                <label>PictureURL</label>
+                <input type = "text" name = "pictureURL" maxlength = "150">
+            </div>
+            <div class = "form_group">
+                <label>Price</label>
+                <input type = "text" name = "price" maxlength = "7">
+            </div>
+            <input type = "submit"  class = "btn btn-primary submit_btn" value= "Submit" Submit">
         </form>
+    </div
     </body>
 </html>
 _END;
+?>

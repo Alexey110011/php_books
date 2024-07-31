@@ -3,12 +3,11 @@ require_once 'header.php';
 require_once 'menu.php';
 
 $error = $user = $password = '';
-if (isset($_SESSION['current_user'])) echo $_SESSION['current_user'];
-else{echo "NO";}
+var_dump($_GET);
 if (isset($_POST['user']))
 {
-    $user = /*sanitizeString(*/$_POST['user']/*)*/;
-    $password = /*sanitizeString(*/$_POST['password']/*)*/;
+    $user = sanitizeString($_POST['user']);
+    $password = sanitizeString($_POST['password']);
     if ($user == "" || $password == "")
     $error = 'Not all fields were entered';
     else
@@ -27,28 +26,33 @@ if (isset($_POST['user']))
                     echo "Good!";
                     $_SESSION['user']=$user;
                     $_SESSION['password'] = $password;
-                    echo "SESSION user".$_SESSION['user'];
-                    header("Location". $_SESSION['current_page']);
-             }
-         else{ echo "Invalid login attempt";}
+                    echo "SESSION user".$_SESSION['user']."Page".$_SESSION['current_page'];
+                    header("Location:". $_SESSION['current_page']);
+                }
+         else{ $error ="Invalid login attempt";}
         }
     }
 }
 echo <<<_END
-<form method = "post" action= "llogin.php">
-<div>
-<span class = "error">$error</span>
-<label> Username</label>
-<input type = "text" maxlength = '16' name = 'user' value = '$user'>
+<div class="form_wrapper">
+    <form method = "post" action= "llogin.php">
+        <div class = "form_group">
+            <label for = "name" class = "form-label"> Username</label>
+            <input type = "text" maxlength = '16' name = 'user' id = "name" value = '$user'>
+        </div>
+        <div class = "form_group">
+            <label for = "password" class = "form-label"> Password</label>
+            <input type = "text" maxlength = '16' name = 'password' id = "password"value = '$password'>
+        </div>
+        <div id= "error">$error</div>
+        <p class = "lead">
+            <span class ="signup_header">Not a member yet? Please, <a href = "signup.php">sign up</a></span>
+        </p>
+        <div>
+            <input type ="submit" class = "btn btn-primary submit_btn" value = "Login">
+        </div>
+    </form>
 </div>
-<div>
-<label> Password</label>
-<input type = "text" maxlength = '16' name = 'password' value = '$password'>
-</div>
-<div>
-<input type ="submit" value = "Login">
-</div>
-</form>
 _END;
 ?>
 
