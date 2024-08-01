@@ -1,7 +1,7 @@
 <?php
 require_once 'header.php';
 require_once 'menu.php';
-
+//$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 echo<<<_END
 <script>
 function checkUser(username){

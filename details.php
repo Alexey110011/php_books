@@ -1,5 +1,6 @@
 <?php
 require_once 'header.php';
+require_once 'menu.php';
 //Check if user logged to allow him to make reviews
 echo isset($_SESSION['user']);
 $isUser = '';
@@ -67,22 +68,42 @@ for ($j=0;$j<$rows;$j++){
     $rating =  htmlspecialchars($row['rating']);
 //Book's details from server-->
     echo <<<_END
-    <div>
-        <pre>
-            Author(s) $authors
-            Title $title
-            Description $description
-            Year $year
-            Category $category
+        <div class = "inner">
+        <div class = "description">
+            <div> $authors </div>
+            <div> $title </div>
+        
+        <div>
             <img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/>
-            Price $price
-        </pre>
-     </div>
-   _END;
+            
+        </div>
+        _END;
+        echo '<div style  ="margin-left:10px">';
+        for ($i =0;$i<5; $i++){
+            if ($i<$rating){
+            echo <<<_STAR
+            <span class = "bi bi-star-fill" style = "color:yellow;"></span>
+            _STAR;
+            } else {
+            echo <<<_STAR
+            <span class = "bi bi-star" style = "color:yellow"></span>
+            _STAR;
+            }
+        }
+        echo '</div>';
+        echo <<< _END1
+        <div class ="description">
+            <div> Category <span class = "badge bg-secondary">$category</span></div>
+            <div> Year $year </div>
+            <div> Price $price </div>
+            <div class ="descript_">$description</div>
+            <button style = "margin-top: 30px; margin-left:20px" onclick  = "sendReview1()">ADD review</button>
+        </div>
+        </div>
+     _END1;
 }
 ?>
 
-<button onclick  = "sendReview1()">ADD review</button>
 <div id = "review_form" style= "display:none;position: fixed; top:100px; left:10%;background-color:blue" class  = "col-xs-10 col-sm-8 col-lg-2">
     <!--Review form from server-->
     <?php include 'review.php'?>

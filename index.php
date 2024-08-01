@@ -2,7 +2,7 @@
 require_once "header.php";
 require_once "setup.php";
 require_once 'menu.php';
-
+$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 $authors = $title = $description = $year = $category  = $pictureURL = $price =  $search= $query = '';
 
 $connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
@@ -16,15 +16,13 @@ function get_post($connection, $var){
 $query = "SELECT * FROM books";
  $result = $connection->query($query);
 if(!$result) die ('Alar');
-?>
+$rows= $result->num_rows;
+if ($rows==0){echo 'div>0 books found"</div>';}
+else {
+    echo "<div>$rows books found</div>";
+};?>
 <div id = "sh">
 <?php
-$rows= $result->num_rows;
-if ($rows==0){echo "0 books found";}
-else {
-    echo "$rows books found";
-};
-
 for ($j=0;$j<$rows;$j++){
     $row = $result->fetch_array(MYSQLI_ASSOC);
     $bookId = htmlspecialchars($row['bookId']);
@@ -35,41 +33,33 @@ for ($j=0;$j<$rows;$j++){
     $pictureURL = htmlspecialchars($row['pictureURL']);
     $price = htmlspecialchars($row['price']);
     $rating = htmlspecialchars($row['rating']);
-    
+    ?>
+    <div class = "item_wrapper">
+    <?php
     echo <<<_END
-    <pre>
-            Author(s) $authors
-            Title <a href = details.php?bookId='$bookId'>$title</a>
-            Year $year
-            Category $category
-            <img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/>
-            Price $price
-            Rating             
-            <div class="stars1" id  = "$bookId"><div>
-    </pre>
-    _END;
+                <div>
+                <a href = details.php?bookId='$bookId'><img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/></a>
+                </div>
+                <h5 class = "title">$authors </h5>
+                <h5>$title </h5>
+                <p><b> $price </b></p>
+             _END;
     for ($i=0;$i<5;$i++){
-       
         if ($i<$rating){
             echo <<<_STAR
-           <span class  = "bi bi-star-fill" style = "color:yellow"></span>
-           _STAR;
-           } else {
+               <span class  = "bi bi-star-fill" style = "color:yellow"></span>
+            _STAR;
+        } else {
             echo <<<_STAR
             <span class = "bi bi-star" style = "color:yellow"></span>
             _STAR;
-            }
-    }
+        }
+    } ?>
+    </div>
+<?php
 }
 ?>
 </div>
-<?php
-echo <<<_END
-<a href = "add.php">Add a book</a>
-<a href = "signup.php">Sign Up</a>
-<a href = "llogin.php">Log in</a>
-_END;
-echo<<< _ENDI
 <script>
 function chooseCriteria(criteria){
     $.post('search.php',
@@ -88,9 +78,6 @@ function searchBook(book){
     })
 }
 </script>
-_ENDI;
-?>
-
 <?php 
 echo <<<_SEARCH_BOX
 <div class = "row">
@@ -104,10 +91,9 @@ display:flex;flex-direction:column;justify-content:center;box-shadow: 5px 5px gr
     </div>
     <div style="align-content: center">
     <input type  = text" id ="search" name  = "search" class = "form-control" oninput = "searchBook(this)">
+    </div> <div>
     </div>
-    <span id = "criteria">ww</span>
-    <span id = "searching">hh</span>
-</div>
+   
 </div>
 _SEARCH_BOX;
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once 'header.php';
-require_once 'menu.php';
+//require_once 'menu.php';
 
 $error = $user = $password = '';
 var_dump($_GET);

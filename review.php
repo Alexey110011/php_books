@@ -1,12 +1,14 @@
 <?php
 require_once 'header.php';
 $bookId = '';
+
+echo "CUR.psge".$_SESSION['current_page'];
 //set bookid for returning on page after login
 if(isset($_SESSION['bookId'])) $bookId = $_SESSION['bookId'];
-//echo "SESSION BookId:".$bookId;
 
 if(isset($_SESSION['user'])){
 //Displaying form for user's review
+//echo $_SESSION['current_page'];
     echo <<<_REVIEW1
     <div style= "visibility:visible">
         <!--Create stars for rating-->
