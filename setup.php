@@ -1,6 +1,6 @@
 <?php
 require_once "functions.php";
-require_once "login.php";
+//require_once "db.php";
 
 createTable('users',
 'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -24,6 +24,7 @@ createTable('reviews',
  bookId VARCHAR(16),
  username VARCHAR(20), 
  review VARCHAR(500),
- user_rating CHAR (1)'
+ user_rating CHAR (1),
+ review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
 );
 ?>

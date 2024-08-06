@@ -17,11 +17,17 @@ $query = "SELECT * FROM books";
  $result = $connection->query($query);
 if(!$result) die ('Alar');
 $rows= $result->num_rows;
-if ($rows==0){echo 'div>0 books found"</div>';}
-else {
-    echo "<div>$rows books found</div>";
-};?>
+?>
+
 <div id = "sh">
+    <span id = "res">
+    <?php
+    if ($rows==0){echo '0 books found';}
+    else {
+        echo "$rows books found";
+    };
+    ?>
+    </span>
 <?php
 for ($j=0;$j<$rows;$j++){
     $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -38,28 +44,31 @@ for ($j=0;$j<$rows;$j++){
     <?php
     echo <<<_END
                 <div>
-                <a href = details.php?bookId='$bookId'><img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/></a>
+                    <a href ="details.php?bookId='$bookId'&title='$title'">
+                    <img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/></a>
                 </div>
-                <h5 class = "title">$authors </h5>
-                <h5>$title </h5>
-                <p><b> $price </b></p>
+                <div>$authors </div>
+                <div>$title </div>
+                <p><b> BYN $price </b></p>
              _END;
     for ($i=0;$i<5;$i++){
         if ($i<$rating){
             echo <<<_STAR
-               <span class  = "bi bi-star-fill" style = "color:yellow"></span>
+               <span class  = "bi bi-star-fill orange"></span>
             _STAR;
         } else {
             echo <<<_STAR
-            <span class = "bi bi-star" style = "color:yellow"></span>
+            <span class = "bi bi-star orange empty"></span>
             _STAR;
         }
-    } ?>
+    } echo "<span class = 'orange'> $rating stars</span>";
+    ?>
     </div>
 <?php
 }
 ?>
 </div>
+
 <script>
 function chooseCriteria(criteria){
     $.post('search.php',
@@ -81,19 +90,16 @@ function searchBook(book){
 <?php 
 echo <<<_SEARCH_BOX
 <div class = "row">
-<div id = "show_search" style = "position:absolute; top:70px;left:200px;visibility:hidden; background-color:rgb(69, 214, 69);
-display:flex;flex-direction:column;justify-content:center;box-shadow: 5px 5px gray;max-width:320px;"">
-<!--<div id = "show_search" class = "search">-->
-    <div style = "display: flex;justify-content: space-between;width:100%"> 
-        <input type = "radio" value = "authors" name = "criteria" onchange = "chooseCriteria(this)">Authors<br>
-        <input type = "radio" value ="title" name = "criteria" onchange = "chooseCriteria(this)">Title <br>
-        <input type = "radio" value = "category" name = "criteria" onchange = "chooseCriteria(this)">Category<br>
-    </div>
-    <div style="align-content: center">
-    <input type  = text" id ="search" name  = "search" class = "form-control" oninput = "searchBook(this)">
-    </div> <div>
-    </div>
-   
-</div>
-_SEARCH_BOX;
-?>
+    <div id = "show_search">
+        <div id = "radio_wrapper"> 
+            <input type = "radio" value = "authors" name = "criteria" onchange = "chooseCriteria(this)">Authors<br>
+            <input type = "radio" value ="title" name = "criteria" onchange = "chooseCriteria(this)">Title <br>
+            <input type = "radio" value = "category" name = "criteria" onchange = "chooseCriteria(this)">Category<br>
+        </div>
+        <div id = "search_input">
+            <input type  = text" id ="search" name  = "search" class = "form-control" oninput = "searchBook(this)">
+        </div> 
+   </div>
+_SEARCH_BOX;?>
+    </body>
+</html>

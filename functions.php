@@ -1,12 +1,20 @@
 <?php
-require_once "login.php";
+require_once "db.php";
+//Content of db.php
+/*<?php 
+$dbhost = "dbhost";
+$dbname = "dbname";
+$dbuser = "dbuser";
+$dbpass = "dbpass"
+?>*/
+
 $connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
 if ($connection->connect_error)
     echo "Fatal Error".$connection->connect_error;
 
 function createTable ($name, $query){
     queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
-    echo "Table $name is created or already existed";
+    //echo "Table $name is created or already existed";
 };
 
 function queryMysql($query){

@@ -1,7 +1,7 @@
 <?php
 require_once "header.php";
-require_once 'login.php';
-if(isset($_POST['user_rating'])) //echo "USER".var_dump($_POST['user_rating']);
+require_once 'db.php';
+if(isset($_POST['user_rating']))
 $username = $user_rating = $bookId = $review='';
 
 if (isset($_SESSION['user'])) $username = $_SESSION['user'];
@@ -37,17 +37,32 @@ if(isset($_POST['user_rating'],$_POST['bookId'], $_POST['review'])){
                 $current_rating[] = $row['user_rating'];
             };
             $all_ratings = array_reduce($current_rating, "sum",0);
-            //echo "Rating".$all_ratings; 
-            $rating = ($user_rating + $all_ratings)/($rows + 1);
+            $rating = ($all_ratings/$rows;
             $rating = round($rating);
-            //echo "Rating".$rating;
-            //Updating rating in db
+            
+                //Updating rating in db
             $query_get = "UPDATE books SET rating = '$rating' WHERE bookId = '$bookId'";
             $result_get = $connection->query($query_get);
             if(!$result_get) echo "Somthing wrong setting";
             else{
             //Retrieving all reviews from db to perform on page
-                include 'list.php';
+                echo '<div>';
+                     include 'list.php';
+                echo'</div>'
+                ?>
+                <script>
+                    function getRating(){
+                        let rating = <?php echo $rating;?>;
+                        //console.log(rating)
+                        $.post('rating.php',
+                        {rating:rating},
+                        function(data){
+                            $('#rating').html(data)
+                        })
+                    }
+                    getRating()
+                </script>
+                <?php
             }
         }
     }   

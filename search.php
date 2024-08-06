@@ -18,12 +18,18 @@ if (isset($_POST['search'])) $_SESSION['search'] =  $_POST['search'];
                 
         $rows= $result->num_rows;
         $_SESSION['rows'] = $rows;
-        /*if ($rows==0){echo '<div>0 books found"</div>';}
-        else {
-            echo "<div>$rows books found</div>";
-        };*/
-        ?>
+    ?>
 
+    <div id = "res"> 
+    <?php
+    if ($rows==0) {
+        echo '<div>0 books found</div>';
+    }
+    else {
+        echo "<div>$rows books found</div>";
+    };
+    ?>
+    </div>
     <?php
     for ($j=0;$j<$rows;$j++){
         $row = $result->fetch_array(MYSQLI_ASSOC);
@@ -41,7 +47,8 @@ if (isset($_POST['search'])) $_SESSION['search'] =  $_POST['search'];
         <?php
             echo <<<_END
                 <div>
-                <a href = "details.php?bookId='$bookId'"><img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/></a>
+                <a href = "details.php?bookId='$bookId'">
+                    <img src = "$pictureURL" alt = "kartinka" width = "150px" height = "200px"/></a>
                 </div>
                 <h5 class = "title">$authors </h5>
                 <h5>$title </h5>
@@ -50,11 +57,11 @@ if (isset($_POST['search'])) $_SESSION['search'] =  $_POST['search'];
                 for ($i=0;$i<5;$i++){
                     if ($i<$rating){
                         echo <<<_STAR
-                        <span class  = "bi bi-star-fill" style = "color:yellow"></span>
+                        <span class  = "bi bi-star-fill orange"></span>
                         _STAR;
                     } else {
                         echo <<<_STAR
-                        <span class = "bi bi-star" style = "color:yellow"></span>
+                        <span class = "bi bi-star orange"></span>
                         _STAR;
                     }
                 } 
@@ -62,7 +69,7 @@ if (isset($_POST['search'])) $_SESSION['search'] =  $_POST['search'];
     <?php
     }
     ?>
-</div>
+
 
    
 

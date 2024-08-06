@@ -4,9 +4,12 @@ require_once 'menu.php';
 
 $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
 echo "Current_page is".$_SESSION['current_page'];
- if (!isset($_SESSION['user']))
+
+//Redirect to login page of unlogged user
+
+if (!isset($_SESSION['user']))
     {
-        header('Location:llogin.php');
+        header('Location:login.php');
         exit;
     }
 
@@ -44,48 +47,43 @@ function get_post($connection, $var){
 }
 
 echo <<<_END
-<html>
-    <head>
-        <title> adding form</title>
-    </head>
-    <body>
-    <div class = "form_wrapper">
-        <form method = "post" action = "add.php">
-            <div class = "form_group">
-                <label>Author(s)</label>
-                <input type = "text" name = "authors" maxlength = "100">
-            </div>
-            <div class = "form_group">
-                <label>Title </label>
-                <input type = "text" name = "title" maxlength = "75">
-            </div>
-            <div class = "form_group">
-                <label>Description</label>
-                <input type = "text" name = "description" maxlength = "500">
-            </div>
-            <div class = "form_group">
-                <label>Year</label>
-                <input type = "text" name = "year" maxlength = "4">
-            </div>
-            <div class = "form_group">
-                <label>Category</label>
-                <select style = "width:153px" name = "category" maxlength = "10">
-                    <option value = "Frontend">Frontend</option>
-                    <option value = "Backend">Backend</option>
-                    <option value = "Fullstack">Fullstack</option>
-                </select>
-            </div>
-            <div class = "form_group">
-                <label>PictureURL</label>
-                <input type = "text" name = "pictureURL" maxlength = "150">
-            </div>
-            <div class = "form_group">
-                <label>Price</label>
-                <input type = "text" name = "price" maxlength = "7">
-            </div>
-            <input type = "submit"  class = "btn btn-primary submit_btn" value= "Submit" Submit">
-        </form>
-    </div
+    <div class = "form_wrapper" id ="add_form">
+            <form method = "post" action = "add.php">
+                <div class = "form_group">
+                    <label>Author(s)</label>
+                    <input type = "text" name = "authors" maxlength = "100">
+                </div>
+                <div class = "form_group">
+                    <label>Title </label>
+                    <input type = "text" name = "title" maxlength = "75">
+                </div>
+                <div class = "form_group">
+                    <label>Description</label>
+                    <textarea name = "description" rows = "10" style = "width:172px" maxlength = "500"></textarea>
+                </div>
+                <div class = "form_group">
+                    <label>Year</label>
+                    <input type = "text" name = "year" maxlength = "4">
+                </div>
+                <div class = "form_group">
+                    <label>Category</label>
+                    <select name = "category" maxlength = "10">
+                        <option value = "Frontend">Frontend</option>
+                        <option value = "Backend">Backend</option>
+                        <option value = "Fullstack">Fullstack</option>
+                    </select>
+                </div>
+                <div class = "form_group">
+                    <label>PictureURL</label>
+                    <input type = "text" name = "pictureURL" maxlength = "150">
+                </div>
+                <div class = "form_group">
+                    <label>Price</label>
+                    <input type = "text" name = "price" maxlength = "7">
+                </div>
+                <input type = "submit"  class = "btn btn-primary submit_btn" value= "Submit" Submit">
+            </form>
+        </div>
     </body>
 </html>
 _END;

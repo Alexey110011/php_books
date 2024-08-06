@@ -1,7 +1,7 @@
 <?php
 require_once 'header.php';
 require_once 'menu.php';
-//$_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
+
 echo<<<_END
 <script>
 function checkUser(username){
@@ -60,8 +60,8 @@ echo <<<_END
                 <label for = "password"  class = 'form-label'>Password </label>
                 <input type = "text" id = "password" name = "password" value = "$password">
             </div>
-            <p class = "lead">
-                    <span class ="signup_header">Already a member? Please, <a href = "login.php">log in</a></span>
+            <p>
+                    <span class ="signup_header">Already a member? Please, <a style = "color:blue" href = "login.php">log in</a></span>
                 </p>
             <div id = "error">$error</div>
             <input type = "submit" class = "btn btn-primary submit_btn" value = "Sign up">
@@ -70,6 +70,8 @@ echo <<<_END
 </div>
 _END;
 ?>
+    </body>
+</html>
 
 
 

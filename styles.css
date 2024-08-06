@@ -1,52 +1,109 @@
+@font-face{
+    font-family:"regular1";
+    src:url('fonts/Inter-Regular.ttf')
+}
 
+*{
+    font-family: 'regular1';
+}
 form>*{
     display: block;
 }
-/*nav>*{
-    display:inline-block
-}*/
-/*.navbar_wrapper>*{
-    display: inline
-}*/
-/*.menu ul li{
-    display:inline-block;
-    text-align:middle ;
-    height:50px;
-    font-weight:bold ;
+#review_form{
+    width:80%;
+    min-width:300px;
+    display:block;
+    position: fixed;
+    top:100px;
+    left:10%;
+    background-color:blue;
+}
+#leave_review{
+    margin-top: 30px; 
+    margin-left:20px
+}
+#res{
+    display:block;
+    text-align:center;
+    font-style:italic;
+    position:absolute;
+    top:50px;
+    left:20px;
+    right:0
+}
+.orange{
+    color:orange
+}
+
+.white{
     color:white
-}*/
-/*#toggled li {
-    display:block
-}*/
+}
+
+.empty{
+    margin-left: 5px; 
+ }
+ #radio_wrapper{
+    display: flex;
+    justify-content: space-between;
+    width:100%"
+ }
+
+ #search_input{
+    align-content: center;
+    margin-bottom: 5px;
+ }
+
+#search_menu{
+    font-size: 18px;
+}
+#hamburger{
+    font-size:18px;
+    padding-top:5px
+}
+
+.rating{
+    padding-bottom:10px;
+    margin-bottom:20px;
+    padding-left:5px
+}
+
+#review_text{
+    width:90%
+}
+
+#shwe{
+    margin-bottom:15px
+}
+
+#close_button{
+    color:red; 
+    position:absolute;
+    top:-3px;
+    right:-10px;
+    height:35px;
+    width:35px;
+}
+
+#toggled {
+    padding-left: 0;
+}
+#toggled li{
+    border-bottom: 1px solid white;
+}
+
 #sh {
-/*padding:0 16px;*/
+padding:16px;
 display:flex;
 flex-direction: row;;
 flex-wrap: wrap;;
 justify-content: flex-start;
-margin: 10px 0;
+margin-top:30px;
 
 }
-
-/*ul{
-    display:flex;
-    justify-content: space-around;
-    color:white;
-    background-color: rgb(69, 214, 69);
-    text-decoration: none;
-}*/
-
-#show_search{
-    position: absolute;
-    top:0;
-    left:0;
-    background-color: blue;
-    color:white;
-    cursor:pointer;
-    width:270px;
-    height:100px;
-    margin-bottom: 20px;
+.title{
+    font-size: 20px;
 }
+
 .taken, #error {
     color:red;
     text-align: center;
@@ -62,47 +119,16 @@ margin: 10px 0;
 #stars1 span{
     display:inline-block
 }
-/*.star {
-    display:inline-block;
-    cursor: pointer;
-    height: 25px;
-    width: 25px;
-    margin: 2px;
-    float:left;
-    background-color: blue;
-    clip-path: polygon(
-        50% 0%,
-        63% 38%,
-        100% 38%,
-        69% 59%,
-        82% 100%,
-        50% 75%,
-        18% 100%,
-        31% 59%,
-        0% 38%,
-        37% 38%
-        );
-    }*/
+#stars{
+    text-align:left;margin-bottom:20px;padding-left:15px
+}
 
-    /*.selected {
-        background-color: yellow;
-    }*/
-    button {
-        display:block
-    }
+button {
+    display:block
+}
 
-/*
+
 /* You can add global styles to this file, and also import other style file */
-/**/@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-/*@font-face{
-    font-family:"regular1";
-    src:url('../src/assets/fonts/Inter-Regular.ttf')
-}*/
-/*
-*{
-    margin:0 auto;
-    font-family: 'regular1';
-}*/
 
 .inner{
     display:flex;
@@ -112,25 +138,34 @@ margin: 10px 0;
     margin-bottom:10px;
     margin-top: 20px;
 }
+
 .inner div, #reviews {
     margin-top:10px;
     padding-left: 10px;
     }
-.image{
-    /*flex:0 0 150px*/
+
+.review_form_hid{
+    display:block;
+    position: fixed;
+    top:100px;
+    left:10%;
+    background-color:blue;
 }
+
+.review_form_vis{
+    display:block;
+}
+
 .description{
     font-size: 16px;
     flex:0 0 230px;
-    
-    }
-    /*.description div {
-        vertical-align: bottom;
-    }*/
+    padding-left: 0;
+}
+
 .description :nth-child(1){
     margin-top:0;
-
 }
+
 .item_wrapper{
     width:200px;
     padding-left:15px;
@@ -138,11 +173,13 @@ margin: 10px 0;
     margin-top:10px;
     margin-right:2px
 }
+
 label {
-    color:blueviolet}
+    color:blueviolet
+}
 
 .modal-body div{
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .wrapper{
@@ -231,11 +268,7 @@ border-bottom:1px solid white;
         }
     }
 
-./*short {
-    visibility: visible;
-    background-color: transparent;
-    border:none;
-   }*/
+
  .search1{
     color:white;
     font-size: 20px;
@@ -260,14 +293,11 @@ border-bottom:1px solid white;
     padding-top:10px;
     vertical-align: middle;
 }
+
 .navbar_wrapper>* {
     display:inline-block;
-    /*width:25%
-    /*padding-top:20px*/
 }
-/*.hero, .menu{
-    display:inline
-}*/
+
 .navbar_wrapper ul li{
     display:inline;
     margin-right:20px
@@ -276,13 +306,6 @@ ul li {
     list-style-type: none;
 }
 
-/*.nav_menu{
-    display:flex;
-    justify-content: space-around;
-}
-.nav_menu li {
-display: inline-block;
-}*/
 .logo {
     margin:0 15px;
     font-style: italic;
@@ -298,6 +321,9 @@ display: inline-block;
     top:150px;
     border:2px solid blue;
     background-color: white
+}
+.nav-menu{
+    display:none
 }
 
 .log_header, .signup_header{
@@ -315,17 +341,28 @@ display: inline-block;
     top:150px;border:2px solid blue;
     background-color: white;
 }
+.form_wrapper>form>div>textarea, .form_wrapper>form>div>select{
+    width: 172px;
+}
+
 .submit_btn{
     margin:10px 125px 10px  
 }
-.search{
- position:absolute;
- top:0px;
- display: flex;
- flex-direction: column;
- justify-content: center;
- border: 1px solid blue;
- z-index:2
+
+#show_search {
+    visibility: hidden;
+    background-color:rgb(79, 204, 63);
+    color:white;
+    padding:5px;
+    width:300px;
+    margin:0px auto;
+    margin-top:60px;
+    position:fixed;
+    top:10px;
+    left:7%;
+    right:7%;
+    z-index:2;
+    box-shadow:5px 5px gray
 }
 
 .search div{
@@ -372,7 +409,7 @@ display: inline-block;
 .alert_span, .success_span{
     position:relative;
     top:0px;
-    left:100px;
+    left:300px;
     font-size: 12px;
 }
 .login{
@@ -396,64 +433,61 @@ display: inline-block;
 #toggle_menu{
     display:none
 }
-/*#toggle_short {
-    display:none
-}*/
+
+a:link {
+    color:white;
+    text-decoration:none;
+}
+
+a:visited {
+    color:white;
+}
+ a:hover {
+    text-decoration:underline;
+}
+a:active {
+    color:#b81414
+}
 
 @media(min-width:568px){
-.nav-menu{
-    visibility:visible
-}
-/*#short_menu {
-    display:none
-}*/
-/*#long_menu{
-    display: none
-}*/
-.isntCollapsed{
-    visibility: hidden;
-}
-/*#toggle_short {
-    display:block
-}*/
-/*.title{
-    font-size:16px
-}*/
-}
-@media(max-width:760px){
-    /*.nav-menu{
-        visibility:hidden
-    }*/
-    .toggle-short{
-        visibility:visible
-    }/*.navbar-wrapper ul{
-    display:none
-}*/
-#long_menu{
-    display: none
-}
-#toggle_short {
-    display:block
-}
-#toggle_menu{
-    display:block
-}
-.inner{
-    display:flex;
-    flex-direction:row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin-bottom:10px
-}
-/*#short_menu{
-    display:block
-}*/
+    .nav-menu{
+        display: flex;
+        justify-content: stretch;
 
-label{
-    font-size: 14px;
+    }
+    #toggle-short{
+        visibility: hidden;
+    }
+
+    .isCollapsed{
+        visibility: hidden;
+    }
 }
-.review_form{
-visibility: hidden;
-}
+
+
+@media(max-width:760px){
+    
+    #long_menu{
+        display: none
+    }
+
+    #toggle_menu{
+        display:block
+    }
+
+    .inner{
+        display:flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-bottom:10px
+    }
+
+    label{
+        font-size: 14px;
+    }
+    .review_form{
+    visibility: hidden;
+    }
 }
 
