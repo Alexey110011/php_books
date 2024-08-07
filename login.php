@@ -1,6 +1,6 @@
 <?php
 require_once 'header.php';
-//require_once 'menu.php';
+require_once 'menu.php';
 
 $error = $user = $password = '';
 if (isset($_POST['user']))
@@ -25,6 +25,7 @@ if (isset($_POST['user']))
                     $_SESSION['user']=$user;
                     $_SESSION['password'] = $password;
                     echo "SESSION user".$_SESSION['user']."Page".$_SESSION['current_page'];
+                    $connection->close();
                     header("Location:". $_SESSION['current_page']);
                 }
          else{ $error ="Invalid login attempt";}

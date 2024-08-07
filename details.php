@@ -89,11 +89,13 @@ for ($j=0;$j<$rows;$j++){
                     include 'rating.php';
                 echo '</div>';
                 echo <<< _END1
-                    <div>Category 
+                    <div>Category:
                         <span class = "badge bg-secondary">$category</span>
                     </div>
-                    <div> Year $year </div>
-                    <div> Price $price </div>
+                    <div class = "info">
+                        <div> Year: $year </div>
+                        <div> <b>Price BYN: $price</b></div>
+                    </div>
                     <div class ="descript_">$description</div>
                     <button id ="leave_review" class = "btn btn-success" onclick  = "sendReview1()">
                         Leave a review

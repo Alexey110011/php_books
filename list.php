@@ -16,25 +16,24 @@
         $review_date = implode('-',$temp2);
              
         
-        echo '<div style ="border-bottom:1px solid gray">';
+        echo '<div style ="max-width:350px;">';
         for ($i = 0;$i<5;$i++){
             if ($i<$user_rating){
             echo <<<_STAR1
-            <span class = "bi bi-star-fill orange"></span>
-            _STAR1;
+                <span class = "bi bi-star-fill orange"></span>
+                _STAR1;
             } else {
             echo <<<_STAR1
-            <span class = "bi bi-star orange"></span>
-            _STAR1;
+                <span class = "bi bi-star orange"></span>
+                _STAR1;
             }
         }
         echo <<<_REVIEWS
             <div style = "font-size:14px;padding-left:0">$review</div>
-            
             <span style = "font-size:13px; padding-left:0">$username</span>
             <span class = "pull-right" style = "font-size:13px;padding-left:0">$review_date</span>
-            
             _REVIEWS;
+        echo '<hr>';
         echo '</div>';
     }
     

@@ -63,8 +63,19 @@ form>*{
 
 .rating{
     padding-bottom:10px;
-    margin-bottom:20px;
+    margin-bottom:0px;
     padding-left:5px
+}
+
+.add_wrapper{
+    z-index:3;
+    border:2px solid rgb(243, 242, 245);
+    width:320px;font-size:12px;
+    margin:30px auto;
+    position:relative;
+    top:15px;
+    border:2px solid blue;
+    background-color: white;
 }
 
 #review_text{
@@ -127,7 +138,6 @@ button {
     display:block
 }
 
-
 /* You can add global styles to this file, and also import other style file */
 
 .inner{
@@ -139,11 +149,10 @@ button {
     margin-top: 20px;
 }
 
-.inner div, #reviews {
+#inner div, #reviews{
     margin-top:10px;
     padding-left: 10px;
     }
-
 .review_form_hid{
     display:block;
     position: fixed;
@@ -159,11 +168,12 @@ button {
 .description{
     font-size: 16px;
     flex:0 0 230px;
-    padding-left: 0;
+    padding-left: 10px;
 }
 
 .description :nth-child(1){
-    margin-top:0;
+    margin-top:15px;
+    font-size: 15px;
 }
 
 .item_wrapper{
@@ -190,6 +200,7 @@ label {
     position:relative;
     top:-100px;
 }
+
 .isCollapsed{
     visibility:hidden;
     position:fixed;
@@ -198,12 +209,12 @@ label {
     z-index:5;
     right:0px;
     color:wheat;
-    background-color:black;
-    opacity:0.8;
+    background-color:rgb(85, 97, 87);
     height: 35vh;
     margin-top:0px;
-    font-size: 18px;
+    font-size: 16px;
     }
+
 .isntCollapsed{
     position:absolute;
     top:5px;
@@ -212,7 +223,7 @@ label {
     margin-top:45px;
     visibility:visible;
     color:wheat;
-    background-color:black;
+    background-color:gray;
     opacity:0.8;
     height: 35vh;
     font-size:16px;
@@ -228,7 +239,7 @@ margin-right: 15px;
 border-bottom:1px solid white;
 }
 .isntCollapsed a, .isCollapsed a{
-    font-size: 18px;
+    font-size: 16px;
 }
 .isCollapsed ul{
     margin-left:0
@@ -250,6 +261,9 @@ border-bottom:1px solid white;
         background-color: rgba(54, 46, 46, 0.623);
         opacity:1;
         }
+    .menu_back{
+        animation: menu_back 3s;
+    }
 @keyframes menu_back{
     from{
         position: absolute;
@@ -338,10 +352,12 @@ ul li {
     width:320px;font-size:12px;
     margin:30px auto;
     position:relative;
-    top:150px;border:2px solid blue;
+    top:150px;
+    border:2px solid blue;
     background-color: white;
 }
-.form_wrapper>form>div>textarea, .form_wrapper>form>div>select{
+.form_wrapper>form>div,
+.add_wrapper>form>div>select{
     width: 172px;
 }
 
@@ -391,10 +407,13 @@ ul li {
     font-size: 12px;
 }
 .descript_{
+    margin-top:10px;
     font-size: 14px;
     flex:0 4 800px
 }
-
+.info div {
+    margin-bottom: 10px;
+}
 .book{
     position:relative;
     margin-left: 20px;

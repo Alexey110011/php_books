@@ -7,9 +7,9 @@ $username = $user_rating = $bookId = $review='';
 if (isset($_SESSION['user'])) $username = $_SESSION['user'];
         
 if(isset($_POST['user_rating'],$_POST['bookId'], $_POST['review'])){
-    $user_rating =  $_POST['user_rating'];
-    $bookId = $_POST['bookId'];
-    $review = $_POST['review'];
+    $user_rating =  sanitizeString($_POST['user_rating']);
+    $bookId = sanitizeString($_POST['bookId']);
+    $review = sanitizeString($_POST['review']);
     
      $connection = new mysqli($dbhost, $dbuser,$dbpass, $dbname);
     if ($connection->connect_error) {
@@ -37,7 +37,7 @@ if(isset($_POST['user_rating'],$_POST['bookId'], $_POST['review'])){
                 $current_rating[] = $row['user_rating'];
             };
             $all_ratings = array_reduce($current_rating, "sum",0);
-            $rating = ($all_ratings/$rows;
+            $rating = $all_ratings/$rows;
             $rating = round($rating);
             
                 //Updating rating in db

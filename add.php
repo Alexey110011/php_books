@@ -33,6 +33,7 @@ $year = get_post($connection, 'year');
 $category = get_post($connection, 'category');
 $pictureURL = get_post($connection, 'pictureURL');
 $price = get_post($connection, 'price');
+
 $query = "INSERT INTO books (authors,title,description,year,category,pictureURL,price) VALUES
 ('$authors','$title','$description','$year','$category','$pictureURL','$price')";
 $result = $connection->query($query);
@@ -47,27 +48,27 @@ function get_post($connection, $var){
 }
 
 echo <<<_END
-    <div class = "form_wrapper" id ="add_form">
+    <div class = "add_wrapper">
             <form method = "post" action = "add.php">
                 <div class = "form_group">
                     <label>Author(s)</label>
-                    <input type = "text" name = "authors" maxlength = "100">
+                    <input type = "text" name = "authors" maxlength = "100" required>
                 </div>
                 <div class = "form_group">
                     <label>Title </label>
-                    <input type = "text" name = "title" maxlength = "75">
+                    <input type = "text" name = "title" maxlength = "100" required>
                 </div>
                 <div class = "form_group">
                     <label>Description</label>
-                    <textarea name = "description" rows = "10" style = "width:172px" maxlength = "500"></textarea>
+                    <textarea name = "description" rows = "10" style = "width:172px" maxlength = "500" required></textarea>
                 </div>
                 <div class = "form_group">
                     <label>Year</label>
-                    <input type = "text" name = "year" maxlength = "4">
+                    <input type = "text" name = "year" maxlength = "4" required>
                 </div>
                 <div class = "form_group">
                     <label>Category</label>
-                    <select name = "category" maxlength = "10">
+                    <select name = "category" maxlength = "9">
                         <option value = "Frontend">Frontend</option>
                         <option value = "Backend">Backend</option>
                         <option value = "Fullstack">Fullstack</option>
@@ -75,11 +76,11 @@ echo <<<_END
                 </div>
                 <div class = "form_group">
                     <label>PictureURL</label>
-                    <input type = "text" name = "pictureURL" maxlength = "150">
+                    <input type = "text" name = "pictureURL" maxlength = "150" required>
                 </div>
                 <div class = "form_group">
                     <label>Price</label>
-                    <input type = "text" name = "price" maxlength = "7">
+                    <input type = "text" name = "price" maxlength = "10" required>
                 </div>
                 <input type = "submit"  class = "btn btn-primary submit_btn" value= "Submit" Submit">
             </form>

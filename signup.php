@@ -40,6 +40,7 @@ if (isset($_POST['username']))
             $_SESSION['username'] = $user;
             $_SESSION['password'] = $password;
             echo("Account created".$_SESSION['username'].$_SESSION['password']);
+            $connection->close();
             header("Location:".$_SESSION['current_page']);
         }
     }
