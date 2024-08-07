@@ -101,7 +101,9 @@ form>*{
 #toggled li{
     border-bottom: 1px solid white;
 }
-
+.review_wrapper{
+    max-width: 340px;
+}
 #sh {
 padding:16px;
 display:flex;
@@ -413,6 +415,12 @@ ul li {
 }
 .info div {
     margin-bottom: 10px;
+}
+.date{
+    margin-top: 10px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .book{
     position:relative;

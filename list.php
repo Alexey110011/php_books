@@ -16,7 +16,7 @@
         $review_date = implode('-',$temp2);
              
         
-        echo '<div style ="max-width:350px;">';
+        echo '<div class ="review_wrapper">';
         for ($i = 0;$i<5;$i++){
             if ($i<$user_rating){
             echo <<<_STAR1
@@ -30,8 +30,10 @@
         }
         echo <<<_REVIEWS
             <div style = "font-size:14px;padding-left:0">$review</div>
+            <div class = "date">
             <span style = "font-size:13px; padding-left:0">$username</span>
             <span class = "pull-right" style = "font-size:13px;padding-left:0">$review_date</span>
+            </div>
             _REVIEWS;
         echo '<hr>';
         echo '</div>';
