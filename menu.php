@@ -4,19 +4,17 @@ require_once 'header.php';
         echo <<<_MENU
          <div class = "navbar_wrapper">
             <div class ="logo">Book Shelf</div>
-            <div onclick = "toggleSearchVisible()">
-                <span id = "search_menu"  class ="bi-search">Search</span>
-            </div>  
-            
-                <ul class = "nav-menu">
+            <ul class = "nav-menu">
                     <li><a href = "add.php">Add book</a></li>
                     <li><a href = "signup.php">Sign up</a></li>
                     <li><a href = "login.php">Log in</a></li>
                 </ul>
-            
-                <div id = "toggle-short" onclick="toggleFunc()">
-                    <span id = "hamburger" class =  "bi-list"></span>
-                </div>
+            <div onclick = "toggleSearchVisible()">
+                <span id = "search_menu"  class ="bi-search">Search</span>
+            </div>  
+            <div id = "toggle-short" onclick="toggleFunc()">
+                <span id = "hamburger" class =  "bi-list"></span>
+            </div>
             </div> 
             <ul id ="toggled" class = "isCollapsed">
                 <li><a href = "add.php">Add book</a></li>

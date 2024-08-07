@@ -96,14 +96,16 @@ for ($j=0;$j<$rows;$j++){
                         <div> Year: $year </div>
                         <div> <b>Price BYN: $price</b></div>
                     </div>
-                    <div class ="descript_">$description</div>
                     <button id ="leave_review" class = "btn btn-success" onclick  = "sendReview1()">
                         Leave a review
-                    </button>
-                </div>
+                    </button> 
+                    </div>
+                    <div class ='descript_'>$description</div>
+            </div>
+               
         _END1;
     }
-    ?>
+    ?> 
         <div id = "reviews">
          <!--Review's list from server-->
         <?php
@@ -111,6 +113,7 @@ for ($j=0;$j<$rows;$j++){
             include 'list.php';
         ?>
         </div>
+        
     </body>
 </html>
 
